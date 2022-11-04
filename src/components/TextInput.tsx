@@ -1,18 +1,20 @@
-import React, {useRef} from 'react'
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native'
-import {Feather} from '@expo/vector-icons'
+import React, { useRef } from 'react'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 export default function ({
   label,
   error,
   touched,
   containerStyle,
   style,
+  icon,
   size = 'medium',
   ...others
 }: TextInput['props'] & {
   label?: string
   error?: string
   touched?: boolean
+  icon?: React.ComponentProps<typeof Icon>['name']
   containerStyle?: View['props']['style']
   size?: 'medium' | 'small'
 }) {
@@ -25,13 +27,15 @@ export default function ({
     <View
       style={{
         marginVertical: 8,
-      }}>
+      }}
+    >
       {label ? (
         <Text
           style={{
             fontSize: 16,
             color: '#777777',
-          }}>
+          }}
+        >
           {label}
         </Text>
       ) : null}
@@ -42,10 +46,11 @@ export default function ({
           size === 'small' && styles.inputSmall,
           success && styles.inputSuccess,
           hasError ? styles.inputError : null,
-          others.multiline && {height: 90},
+          others.multiline && { height: 90 },
           style,
         ]}
-        onPress={() => ref.current?.focus()}>
+        onPress={() => ref.current?.focus()}
+      >
         <TextInput
           ref={ref}
           {...others}
@@ -57,6 +62,18 @@ export default function ({
               : 'default'
           }
         />
+        {icon && (
+          <Icon
+            name={icon}
+            color={hasError ? '#FF3333' : success ? '#00DC00' : '#999999'}
+            size={21}
+            style={{
+              position: 'absolute',
+              right: 0,
+              marginRight: 10,
+            }}
+          />
+        )}
       </Pressable>
 
       {hasError ? <Text style={styles.error}>{error}</Text> : null}
@@ -72,7 +89,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 48,
-    paddingHorizontal: 17,
     // backgroundColor: '#F8F8F8',
   },
   inputSmall: {
