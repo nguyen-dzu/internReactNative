@@ -82,6 +82,7 @@ export default function Main() {
           control={control}
           name="birthday"
           label="Ngày Sinh*"
+          setValue={setValue}
           rules={{
             required: 'Vui Lòng Nhập Vào Ngày Sinh',
           }}
@@ -218,10 +219,6 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
     marginHorizontal: 15,
-  },
-  text: {
-    fontSize: 16,
-    color: '#777777',
   },
   buttonSubmit: {
     height: 40,

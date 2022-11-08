@@ -2,10 +2,18 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { Control, Controller, FieldValue, useForm } from 'react-hook-form';
+import {
+  Control,
+  Controller,
+  FieldValue,
+  FieldValues,
+  useForm,
+  UseFormSetValue,
+} from 'react-hook-form';
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment';
 import InputText from '../components/InputText';
+import RadioButtonsGroup from 'react-native-radio-buttons-group';
 
 export default function FormInput({
   rules,
@@ -13,24 +21,20 @@ export default function FormInput({
   label,
   control,
   type,
-  openDate,
-  setOpenDate,
+  setValue,
 }: {
   type?: any;
   rules?: any;
   name?: any;
   label?: string;
   control?: any;
-  openDate?: boolean;
-  setOpenDate?: (openDate: boolean) => void;
+  setValue?: any;
 }) {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const handelOpen = () => {
     setOpen(true);
   };
-  const { setValue } = useForm();
-
   return (
     <View>
       <Controller
