@@ -9,20 +9,8 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { Provider } from 'react-redux';
-import store from './src/redux/store';
 import FormInput from './src/screens/Main';
 
 const App = () => {
