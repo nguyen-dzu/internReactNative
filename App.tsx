@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react'
+import React from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -18,15 +18,17 @@ import {
   TextInput,
   useColorScheme,
   View,
-} from 'react-native'
+} from 'react-native';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen'
-import FormInput from './src/screens/FormInput'
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
+import FormInput from './src/screens/Main';
 
 const App = () => {
-  return <FormInput />
-}
+  return <FormInput />;
+};
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
 
-export default App
+export default App;
