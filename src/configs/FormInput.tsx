@@ -29,6 +29,7 @@ export default function FormInput({
   const handelOpen = () => {
     setOpen(true);
   };
+  const { setValue } = useForm();
 
   return (
     <View>
@@ -87,6 +88,7 @@ export default function FormInput({
                     onConfirm={(date) => {
                       setOpen(false);
                       setDate(date);
+                      setValue(name, date);
                     }}
                     onCancel={() => {
                       setOpen(false);
