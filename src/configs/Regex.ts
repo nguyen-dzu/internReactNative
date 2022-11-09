@@ -1,4 +1,4 @@
 export default {
   vietnamPhoneNumber: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g,
-  REGEX_ONLY_NUMBER: /^\d+$/,
-}
+  EmailValid: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+};

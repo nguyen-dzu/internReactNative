@@ -16,47 +16,15 @@ import { useForm, Controller } from 'react-hook-form';
 import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
 import RadioButtonsGroup from 'react-native-radio-buttons-group';
 import FormInput from '../configs/FormInput';
-const radioButtonsData = [
-  {
-    id: '1',
-    label: 'Nam',
-    value: 'male',
-  },
-  {
-    id: '2',
-    label: 'Nữ',
-    value: 'female',
-  },
-  {
-    id: '3',
-    label: 'Khác',
-    value: 'other',
-  },
-];
+import Regex from '../configs/Regex';
+
 const widthScreen = Dimensions.get('window').width;
 export default function Main() {
-  const [radioButtons, setRadioButtons] =
-    useState<RadioButtonProps[]>(radioButtonsData);
-  const [openDrop, setOpenDrop] = useState(false);
-  const [valueDrop, setValueDrop]: any = useState([]);
-  const [items, setItems]: any = useState([
-    { label: 'Thợ Đụng', value: 'dung' },
-    { label: 'Thợ code', value: 'code' },
-    { label: 'Thợ Nê', value: 'ne' },
-
-    { label: 'Thợ mộc', value: 'moc' },
-  ]);
   const { handleSubmit, control, setValue } = useForm();
   const onSubmit = (data: any) => {
     console.log(data);
   };
 
-  const changeRadio = (value: RadioButtonProps[]) => {
-    setRadioButtons(value);
-    value.filter((item, index) => {
-      if (item.selected) setValue('Gender', item.value);
-    });
-  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -65,6 +33,7 @@ export default function Main() {
           control={control}
           name="fullName"
           label="Họ Và Tên*"
+          placeholder="Nguyễn Văn A"
           rules={{
             required: 'Vui Lòng Nhập Vào Họ Và Tên',
             maxLength: {
@@ -87,108 +56,70 @@ export default function Main() {
             required: 'Vui Lòng Nhập Vào Ngày Sinh',
           }}
         />
-        {/* 
-        <Controller
-          defaultValue=""
+        <FormInput
+          type="RadioButton"
           control={control}
-          render={({ onChange, value }: any) => (
-            <>
-              <Text style={styles.text}>Giới Tính</Text>
-              <RadioButtonsGroup
-                layout="row"
-                radioButtons={radioButtons}
-                onPress={changeRadio}
-              />
-            </>
-          )}
-          name="Gender"
+          name="gender"
+          label="Giới tính"
+          setValue={setValue}
         />
-        <View>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-              maxLength: 15,
-              minLength: 9,
-            }}
-            name="idCard"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <InputText
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                keyboardType="number-pad"
-                label="Số CMND*"
-              />
-            )}
-          />
-          {errors.idCard && (
-            <Text
-              style={{
-                color: '#FF3333',
-              }}
-            >
-              Nhập vào CMND của bạn
-            </Text>
-          )}
-        </View>
-        <View>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-              maxLength: 15,
-              minLength: 9,
-            }}
-            name="PhoneNumber"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <InputText
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                keyboardType="number-pad"
-                textContentType="telephoneNumber"
-                label="Số Điện Thoại"
-              />
-            )}
-          />
-          {errors.PhoneNumber && (
-            <Text
-              style={{
-                color: '#FF3333',
-              }}
-            >
-              Nhập vào SĐT của bạn
-            </Text>
-          )}
-        </View>
-        <View>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            name="email"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <InputText
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                label="Email"
-              />
-            )}
-          />
-          {errors.email && (
-            <Text
-              style={{
-                color: '#FF3333',
-              }}
-            >
-              Nhập vào SĐT của bạn
-            </Text>
-          )}
-        </View> */}
+        <FormInput
+          type="input"
+          control={control}
+          name="idCard"
+          keyboardType="number-pad"
+          label="CMND*"
+          placeholder="XXX XXX XXX"
+          rules={{
+            required: 'Vui Lòng Nhập Vào CMND',
+            pattern: {
+              value: /\d+/,
+              message: 'Vui Lòng Chỉ Nhập Vào Số.',
+            },
+            maxLength: {
+              value: 15,
+              message: 'CMND phải dưới 15 kí tự',
+            },
+            minLength: {
+              value: 9,
+              message: 'CMND phải trên 9 ký tự',
+            },
+          }}
+        />
+        <FormInput
+          type="input"
+          control={control}
+          name="PhoneNumber"
+          keyboardType="number-pad"
+          label="Số Điện Thoại"
+          placeholder="+84 XXX XXX XXX"
+          rules={{
+            pattern: {
+              value: Regex.vietnamPhoneNumber,
+              message: 'Số Điện Thoại Không Hợp Lệ',
+            },
+          }}
+        />
+        <FormInput
+          type="input"
+          control={control}
+          name="Email"
+          label="Email*"
+          rules={{
+            pattern: {
+              value: Regex.EmailValid,
+              message: 'email Không Hợp Lệ',
+            },
+          }}
+        />
       </ScrollView>
+      <FormInput
+        setValue={setValue}
+        type="dropdown"
+        control={control}
+        name="Occupation"
+        label="Nghề Nghiệp"
+      />
 
       <View
         style={{
@@ -228,16 +159,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
-  },
-  formInput: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 17,
-    flex: 1,
-    height: 40,
-    borderWidth: 1,
-    padding: 4,
-    borderRadius: 4,
-    borderColor: '#999999',
   },
 });

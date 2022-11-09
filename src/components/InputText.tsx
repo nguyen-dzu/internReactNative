@@ -12,22 +12,7 @@ export default function InputText({
   label?: string;
 }) {
   return (
-    <View
-      style={{
-        marginVertical: 8,
-      }}
-    >
-      {label ? (
-        <Text
-          style={{
-            fontSize: 16,
-            color: '#777777',
-            marginBottom: 6,
-          }}
-        >
-          {label}
-        </Text>
-      ) : null}
+    <View>
       <TextInput
         {...others}
         style={styles.formInput}
@@ -46,7 +31,7 @@ export default function InputText({
           style={{
             position: 'absolute',
             right: 0,
-            top: 35,
+            top: 9,
             marginRight: 10,
           }}
         />
@@ -65,15 +50,6 @@ const styles = StyleSheet.create({
     height: 48,
     // backgroundColor: '#F8F8F8',
   },
-  inputSmall: {
-    height: 40,
-  },
-  inputSuccess: {
-    borderColor: '#00DC00',
-  },
-  inputError: {
-    borderColor: '#FF3333',
-  },
   error: {
     color: '#FF3333',
     fontSize: 12,
@@ -84,7 +60,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 17,
-    flex: 1,
     height: 40,
     borderWidth: 1,
     padding: 4,
