@@ -11,9 +11,11 @@ export default function ({ item }: { item?: ICategories }) {
   };
   return (
     <SafeAreaView>
-      <Text style={{ textAlign: 'center', fontSize: 20, fontWeight: '600' }}>
-        {item?.title}
-      </Text>
+      {item ? (
+        <Text style={{ textAlign: 'center', fontSize: 20, fontWeight: '600' }}>
+          {item?.title}
+        </Text>
+      ) : null}
       <TouchableOpacity
         style={{
           borderWidth: 1,
