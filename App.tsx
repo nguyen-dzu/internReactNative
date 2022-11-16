@@ -9,12 +9,18 @@
  */
 
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import Navigation from './src/navigation';
+import Main from './src/screens/Main';
 
 import FormInput from './src/screens/Main';
 
 const App = () => {
-  return <FormInput />;
+  return (
+    <>
+      <Navigation />
+    </>
+  );
 };
 
 const styles = StyleSheet.create({});

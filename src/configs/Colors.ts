@@ -7,4 +7,5 @@ export default {
   success: '#51E11F',
   warning: '#EEF155',
   error: '#E11F1F',
+  tintTab: '#F4A31E',
 };

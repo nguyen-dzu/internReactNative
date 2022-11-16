@@ -148,14 +148,16 @@ export default function ({
                       {label}
                     </Text>
                   ) : null}
-                  <TouchableOpacity onPress={() => handelOpen()}>
+                  <TouchableOpacity>
                     <Pressable
                       style={[
                         styles.input,
                         value && styles.inputSuccess,
                         error ? styles.inputError : null,
                       ]}
-                      onPress={() => ref.current?.focus()}
+                      onPress={() => {
+                        ref.current?.focus(), handelOpen();
+                      }}
                     >
                       <View pointerEvents="none">
                         <InputText
@@ -183,7 +185,10 @@ export default function ({
                     onConfirm={(date) => {
                       setOpen(false);
                       setDate(date);
-                      setValue(name, date);
+                      const yearCurrent = new Date();
+                      const yearSelected = date.getFullYear();
+                      const total = yearCurrent.getFullYear() - yearSelected;
+                      setValue(name, total);
                     }}
                     onCancel={() => {
                       setOpen(false);

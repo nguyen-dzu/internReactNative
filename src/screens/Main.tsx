@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 /* eslint-disable @typescript-eslint/no-shadow */
 import React, { useState } from 'react';
 import {
@@ -17,12 +18,18 @@ import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
 import RadioButtonsGroup from 'react-native-radio-buttons-group';
 import FormInput from '../configs/FormInput';
 import Regex from '../configs/Regex';
+import { StackParamList } from '../Type';
+import { StackScreenProps } from '@react-navigation/stack';
+import storage from '../configs/storage';
+import Navigation from '../navigation';
 
 const widthScreen = Dimensions.get('window').width;
-export default function Main() {
+export default function Main({
+  navigation,
+}: StackScreenProps<StackParamList, 'MainScreens'>) {
   const { handleSubmit, control, setValue } = useForm();
   const onSubmit = (data: any) => {
-    console.log(data);
+    if (data) navigation.navigate('Tab');
   };
 
   return (
@@ -54,6 +61,14 @@ export default function Main() {
           setValue={setValue}
           rules={{
             required: 'Vui Lòng Nhập Vào Ngày Sinh',
+            min: {
+              value: 13,
+              message: 'Bạn phải trên 13 tuổi',
+            },
+            max: {
+              value: 65,
+              message: 'Bạn phải dưới 65 tuổi',
+            },
           }}
         />
         <FormInput

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 module.exports = {
   root: true,
   extends: '@react-native-community',
@@ -11,7 +12,7 @@ module.exports = {
         'no-shadow': 'off',
         'no-undef': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
-        'prettier/prettier': 'off',
+        'prettier/prettier': 0,
         'no-trailing-spaces': 'off',
         'react-native/no-inline-styles': 'off',
       },

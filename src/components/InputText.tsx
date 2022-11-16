@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
-export default function InputText({
+export default function ({
   label,
   style,
   icon,
